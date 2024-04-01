@@ -27,7 +27,7 @@ pipeline {
         stage('Build') {
             steps {
                 script {
-                    // Replace this with your build command, if needed
+                
                     sh 'npm run build'
                 }
             }
@@ -35,9 +35,7 @@ pipeline {
 
         stage('Deploy') {
             steps {
-                // Add your deployment steps here
-                // For example:
-                // sh 'npm run deploy'
+                sh 'npm run deploy'
             }
         }
     }
@@ -45,12 +43,10 @@ pipeline {
     post {
         success {
             echo 'The Node.js backend build was successful!'
-            // You can trigger further actions on success, like deployment
         }
 
         failure {
             echo 'The Node.js backend build failed!'
-            // You can take actions in case of failure, like notifying the team
         }
     }
 }
