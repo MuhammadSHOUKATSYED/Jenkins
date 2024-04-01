@@ -26,7 +26,7 @@ pipeline {
             steps {
                 // Add your test execution commands here
                 // For example, if you're using Jest for React testing:
-                // sh 'npm test'
+                sh 'npm test'
             }
         }
         
