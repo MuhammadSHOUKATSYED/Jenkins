@@ -1,55 +1,56 @@
 pipeline {
     agent any
-    
+
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/NaseemKhan005/react-bank-app'
+                checkout scm
             }
         }
-        
-        stage('Dependency Installation') {
+
+        stage('Install Dependencies') {
             steps {
-                // You might need different commands depending on your project setup
-                sh 'npm install' // For frontend dependencies
-                // Add backend dependency installation commands here
+                script {
+                    sh 'npm install'
+                }
             }
         }
-        
-        stage('Build') {
-            steps {
-                sh 'npm run build' // Assuming this is your React build script
-            }
-        }
-        
+
         stage('Test') {
             steps {
-                // Add your test execution commands here
-                // For example, if you're using Jest for React testing:
-                sh 'npm test'
+                script {
+                    sh 'npm test'
+                }
             }
         }
-        
-        stage('Containerized') {
+
+        stage('Build') {
             steps {
-                // Build Docker images for frontend and backend (if applicable)
                 script {
-                    docker.build('frontend-image', '.')
-                    // Add commands to build backend image if needed
+                    // Replace this with your build command, if needed
+                    sh 'npm run build'
                 }
-                // Run Docker Compose to deploy the containers
-                sh 'docker-compose up -d'
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                // Add your deployment steps here
+                // For example:
+                // sh 'npm run deploy'
             }
         }
     }
-    
+
     post {
         success {
-            echo 'Pipeline executed successfully!'
+            echo 'The Node.js backend build was successful!'
+            // You can trigger further actions on success, like deployment
         }
+
         failure {
-            echo 'Pipeline failed!'
-            // You can add additional steps here for failure handling
+            echo 'The Node.js backend build failed!'
+            // You can take actions in case of failure, like notifying the team
         }
     }
 }
