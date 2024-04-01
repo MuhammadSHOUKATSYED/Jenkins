@@ -11,14 +11,14 @@ pipeline {
         stage('Dependency Installation') {
             steps {
                 // You might need different commands depending on your project setup
-                bat 'npm install' // For frontend dependencies
+                sh 'npm install' // For frontend dependencies
                 // Add backend dependency installation commands here
             }
         }
         
         stage('Build') {
             steps {
-                bat 'npm run build' // Assuming this is your React build script
+                sh 'npm run build' // Assuming this is your React build script
             }
         }
         
@@ -38,7 +38,7 @@ pipeline {
                     // Add commands to build backend image if needed
                 }
                 // Run Docker Compose to deploy the containers
-                bat 'docker-compose up -d'
+                sh 'docker-compose up -d'
             }
         }
     }
