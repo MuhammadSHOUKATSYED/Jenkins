@@ -11,7 +11,7 @@ pipeline {
         stage('Dependency Installation') {
             steps {
                 // You might need different commands depending on your project setup
-                sh 'npm install' // For frontend dependencies
+                sh 'npm install express' // For frontend dependencies
                 // Add backend dependency installation commands here
             }
         }
